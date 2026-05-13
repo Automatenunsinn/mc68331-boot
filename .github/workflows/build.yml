@@ -31,6 +31,6 @@ jobs:
         draft: false
         prerelease: false
         release_name: main
-        tag_name: main
+        tag_name: mt
       env:
         GITHUB_TOKEN: ${{ github.token }}
