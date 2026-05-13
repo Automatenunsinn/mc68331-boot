@@ -10,6 +10,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Install binutils
       uses: awalsh128/cache-apt-pkgs-action@v1.6.0
       with:
@@ -17,7 +18,19 @@ jobs:
         
     - name: Build
       run: ./build.sh
+
     - name: Upload artifact
       uses: actions/upload-artifact@v7
       with:
         path: init.bin
+
+    - name: Upload release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: main
+        tag_name: main
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
