@@ -24,7 +24,7 @@ jobs:
       with:
         path: init.bin
 
-    - name: Upload release
+    - name: Update release
       uses: actions/create-release@v1
       id: create_release
       with:
@@ -34,3 +34,13 @@ jobs:
         tag_name: mt
       env:
         GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Upload release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./init.bin
+        asset_name: init.bin
+        asset_content_type: application/octet-stream
